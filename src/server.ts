@@ -76,6 +76,10 @@ app.get('/products', async (req, res) => {
     }
 });
 
+app.get('/' , (req:Request,res:Response) => {
+    res.status(200).json({message:"Server is running properly"})
+})
+
 // Delete Product
 app.delete('/products/:id', async (req, res) => {
     try {
