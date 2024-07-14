@@ -2,20 +2,20 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "server.ts",
-"scripts": {
+  "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "ts-node src/server.ts",
     "file": "nodemon src/server.ts",
     "test": "jest"
-},
+  },
   "jest": {
     "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "��#\u0000 \u0000p\u0000r\u0000o\u0000j\u0000e\u0000c\u0000t\u0000-\u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000\r\u0000 \u0000",
   "dependencies": {
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
