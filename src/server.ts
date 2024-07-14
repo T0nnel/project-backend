@@ -22,7 +22,6 @@ registerRoutes(app);
 
 // Connection to database
 const mongo: string = 'mongodb+srv://tonnel:tonnel@cluster0.eyeqbwd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-
 (async function connectToDb() {
     try {
         await mongoose.connect(mongo);
