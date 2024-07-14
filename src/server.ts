@@ -95,26 +95,6 @@ app.delete('/products/:id', async (req, res) => {
     }
 });
 
-// Fetch data from the external link
-const fetchData = async () => {
-    try {
-        const response = await axios.get('https://agrigrowbot.streamlit.app');
-        return response.data; // Adjust this based on the actual data structure
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
-    }
-};
-
-// Home route to display the fetched data
-app.get('/api/data', async (req: Request, res: Response) => {
-    try {
-        const data = await fetchData();
-        res.status(200).json(data); // Return the fetched data as JSON
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data' });
-    }
-});
 
 // Buyer Home
 app.get('/buyerhome', async (req, res) => {
