@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 const nodemailer = require('nodemailer');
 import { registerRoutes } from './Routes';
+import axios from "axios"
 
 dotenv.config();
 
@@ -95,32 +96,25 @@ app.delete('/products/:id', async (req, res) => {
     }
 });
 
-// Email configuration
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: "t8985584@gmail.com", // Your email
-        pass: "toti1234", // Your email password or app password
-    },
-});
+// Fetch data from the external link
+const fetchData = async () => {
+    try {
+        const response = await axios.get('https://agrigrowbot.streamlit.app');
+        return response.data; // Adjust this based on the actual data structure
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+};
 
-// POST endpoint to handle contact form submissions
-app.post('/contact', (req, res) => {
-    const { name, email, message } = req.body;
-
-    const mailOptions = {
-        from: email,
-        to: 'totimbugz@gmail.com', // Your email to receive submissions
-        subject: `Contact Form Submission from ${name}`,
-        text: `You have received a new message from ${name} (${email}):\n\n${message}`,
-    };
-
-    transporter.sendMail(mailOptions, (error: string, info: { response: string; }) => {
-        if (error) {
-            return res.status(500).send('Error sending email: ' + error);
-        }
-        res.status(200).send('Email sent: ' + info.response);
-    });
+// Home route to display the fetched data
+app.get('/api/data', async (req: Request, res: Response) => {
+    try {
+        const data = await fetchData();
+        res.status(200).json(data); // Return the fetched data as JSON
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch data' });
+    }
 });
 
 // Buyer Home
